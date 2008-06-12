@@ -2,7 +2,7 @@ require "rake"
 require "rake/testtask"
 require "rake/rdoctask"
 
-PLUGIN_NAME = "microformat"
+PLUGIN_NAME = "microformats"
 
 
 desc "Default: run unit tests."
@@ -12,7 +12,7 @@ task :default => :test
 desc "Test the #{PLUGIN_NAME} plugin."
 Rake::TestTask.new(:test) do |task|
   task.libs << "lib"
-  task.pattern = "test/**/*_test.rb"
+  task.pattern = "test/*_test.rb"
   task.verbose = true
 end
 
