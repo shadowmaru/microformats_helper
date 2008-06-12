@@ -1,5 +1,40 @@
+# Microformats Helper is a plugin for generating content-rich tags in HTML files, following Microformats standards. For more information about Microformats, check its website (http://microformats.org).
+# 
+# Currently only the hCard microformat is available.
+# 
+# Author:: Ricardo Shiota Yasuda
+# Copyright:: Copyright (c) 2008 Ricardo Shiota Yasuda
+# License:: MIT License (http://www.opensource.org/licenses/mit-license.php)
+#
+
 module MicroformatsHelper
 
+  # ==Options
+  # 
+  # All fields are optional but the name, you are required to provide at least one of the names below.
+  # 
+  # ===Name
+  # 
+  # * +fn+ - Formal Name: should be used when no other name is provided
+  # * +given+ - Given Name
+  # * +family+ - Family Name
+  # * +additional+ - Additional Name: goes between given and family names
+  # * +prefix+ - Honorific Prefix: for titles like Dr. or Sir
+  # * +suffix+ - Honorific Suffix: for titles like M.D. or Jr
+  # 
+  # ===Address
+  # 
+  # * +street+ - Street Address
+  # * +locality+ - The city or similar
+  # * +region+ - The state, county or similar
+  # * +postal-code+ - ZIP number
+  # * +country+ - The country
+  # 
+  # ===Contact
+  # 
+  # * +tel+ - Provide the phone number
+  # * +url+ - Add a link to a site in the name
+  # * +email+ - Add a link to a mailto: address
   def hcard(values)
 
     # support for additional HTML options, e.g. id
