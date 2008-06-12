@@ -69,8 +69,7 @@ module MicroformatsHelper
     end
 
     if tel = values[:tel]
-      tel = "Tel: " + tel
-      div_tel = "\n" + content_tag("div", tel, :class => "tel") + "\n"
+      div_tel = "\nTel: " + content_tag("div", tel, :class => "tel") + "\n"
     else
       div_tel = ""
     end
