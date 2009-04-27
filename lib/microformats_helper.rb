@@ -53,6 +53,9 @@ module MicroformatsHelper
         fn = content_tag("span", prefix, :class => "honorific-prefix")
       end
       fn = "" unless fn
+      if org = values[:org]
+        fn += " " + content_tag("span", org, :class => "org")
+      end
       if given = values[:given]
         fn += " " + content_tag("span", given, :class => "given-name")
       end

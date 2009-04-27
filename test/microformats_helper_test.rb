@@ -1,12 +1,10 @@
 # Rubygems is where Rails is located
 require 'rubygems'
-require 'test/unit'
 require File.dirname(__FILE__) + '/../lib/microformats_helper'
 # Here's the helper file we need
+require 'test/unit'
 require 'action_controller'
 require 'action_controller/test_process'
-require 'action_view/helpers/tag_helper'
-require 'action_view/helpers/url_helper'
 
 class MicroformatsHelperTest < Test::Unit::TestCase
 
@@ -28,6 +26,11 @@ class MicroformatsHelperTest < Test::Unit::TestCase
   def test_hcard_given_additional_family
     output = hcard(:given => "Ricardo", :additional => "Shiota", :family => "Yasuda")
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\"> <span class=\"given-name\">Ricardo</span> <span class=\"additional-name\">Shiota</span> <span class=\"family-name\">Yasuda</span></span>\n</span>", output
+  end
+
+  def test_hcard_org
+    output = hcard(:org => "DBurns Design")
+    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\"> <span class=\"org\">DBurns Design</span></span>\n</span>", output
   end
 
   def test_hcard_prefix_suffix
