@@ -21,18 +21,19 @@ module MicroformatsHelper
   # * +additional+ - Additional Name: goes between given and family names
   # * +prefix+ - Honorific Prefix: for titles like Dr. or Sir
   # * +suffix+ - Honorific Suffix: for titles like M.D. or Jr
+  # * +org+ - Organization name
   # 
   # ===Address
   # 
   # * +street+ - Street Address
   # * +locality+ - The city or similar
   # * +region+ - The state, county or similar
-  # * +postal-code+ - ZIP number
+  # * +postal_code+ - ZIP number
   # * +country+ - The country
   # 
   # ===Contact
   # 
-  # * +tel+ - Provide the phone number
+  # * +tel+ - Provide a hash with the phone types and numbers
   # * +url+ - Add a link to a site in the name
   # * +email+ - Add a link to a mailto: address
   def hcard(values)
@@ -107,7 +108,11 @@ module MicroformatsHelper
     end
 
     if tel = values[:tel]
-      span_tel = "\nTel: " + content_tag("div", tel, :class => "tel") + "\n"
+      tel_values = ""
+      tel.each do |k,v|
+        tel_values += content_tag("span", "#{k.capitalize}: ", :class => "tel-label-#{k} type") + content_tag("span", v, :class => "value")
+      end
+      span_tel = "\n" + content_tag("span", tel_values, :class => "tel") + "\n"
     else
       span_tel = ""
     end

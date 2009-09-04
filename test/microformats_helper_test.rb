@@ -45,7 +45,7 @@ class MicroformatsHelperTest < Test::Unit::TestCase
   
   def test_hcard_address
     output = hcard(:fn => "John Doe", :street => "123 Fictional Lane", :locality => "Neverland", :region => "Imagination")
-    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<div class=\"adr\"><span class=\"street-address\">123 Fictional Lane</span> <span class=\"locality\">Neverland</span> - <span class=\"region\">Imagination</span></div>\n</span>", output
+    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"adr\"><span class=\"street-address\">123 Fictional Lane</span> <span class=\"locality\">Neverland</span> - <span class=\"region\">Imagination</span></span>\n</span>", output
   end
   
   def test_hcard_email
@@ -54,7 +54,7 @@ class MicroformatsHelperTest < Test::Unit::TestCase
   end
   
   def test_hcard_tel
-    output = hcard(:fn => "John Doe", :tel => "555-5555")
-    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\nTel: <div class=\"tel\">555-5555</div>\n</span>", output
+    output = hcard(:fn => "John Doe", :tel => { "fax" => "544-5544", "home" => "555-5555" })
+    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span></span>\n</span>", output
   end
 end

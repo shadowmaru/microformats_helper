@@ -28,7 +28,7 @@ All fields are optional but the name, you are required to provide at least one o
 
 ===Contact
 
-* +tel+ - Provide the phone number
+* +tel+ - Provide a hash with the phone types and numbers
 * +url+ - Add a link to a site in the name
 * +email+ - Add a link to a mailto: address
 
@@ -55,7 +55,21 @@ The output is:
 	<a href="http:blog.shadowmaru.org" class="fn n url">
 		<span class="given-name">Ricardo</span> <span class="family-name">Yasuda</span>
 	</a>
-	<div class="adr">
+	<span class="adr">
 		<span class="country-name">Brazil</span>
-	</div>
+	</span>
+  </span>
+  
+An example with telephone numbers:
+
+  <%= hcard(:fn => "John Doe", :tel => { "fax" => "544-5544", "home" => "555-5555" }) %>
+
+The output is:
+
+  <span class="vcard">
+    <span class="fn n">John Doe</span>
+    <span class="tel">
+      <span class="tel-label-fax type">Fax: </span><span class="value">544-5544</span>
+      <span class="tel-label-home type">Home: </span><span class="value">555-5555</span>
+    </span> 
   </span>
