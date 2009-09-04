@@ -7,6 +7,7 @@
 # License:: MIT License (http://www.opensource.org/licenses/mit-license.php)
 #
 
+
 module MicroformatsHelper
 
   # ==Options
@@ -109,8 +110,8 @@ module MicroformatsHelper
 
     if tel = values[:tel]
       tel_values = ""
-      tel.each do |k,v|
-        tel_values += content_tag("span", "#{k.capitalize}: ", :class => "tel-label-#{k} type") + content_tag("span", v, :class => "value")
+      tel.sort.reverse.each do |k,v|
+        tel_values += content_tag("span", "#{k.capitalize}: ", :class => "tel-label-#{k} type") + content_tag("span", v, :class => "value") + "\n"
       end
       span_tel = "\n" + content_tag("span", tel_values, :class => "tel") + "\n"
     else
