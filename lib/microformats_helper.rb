@@ -98,21 +98,21 @@ module MicroformatsHelper
       address = true
       adr += " " + content_tag("span", country, :class => "country")
     end
-    div_adr = (address == true) ? "\n" + content_tag("div", adr, :class => "adr") + "\n" : ""
+    span_adr = (address == true) ? "\n" + content_tag("span", adr, :class => "adr") + "\n" : ""
 
     if email = values[:email]
-      div_email = "\n" + link_to(email, "mailto:#{email}", :class => "email") + "\n"
+      span_email = "\n" + link_to(email, "mailto:#{email}", :class => "email") + "\n"
     else
-      div_email = ""
+      span_email = ""
     end
 
     if tel = values[:tel]
-      div_tel = "\nTel: " + content_tag("div", tel, :class => "tel") + "\n"
+      span_tel = "\nTel: " + content_tag("div", tel, :class => "tel") + "\n"
     else
-      div_tel = ""
+      span_tel = ""
     end
 
-    content_tag("span", container_fn + div_adr + div_email + div_tel, html_options.update(:class => classes))
+    content_tag("span", container_fn + span_adr + span_email + span_tel, html_options.update(:class => classes))
   end
 
 end

@@ -16,13 +16,14 @@ All fields are optional but the name, you are required to provide at least one o
 * +additional+ - Additional Name: goes between given and family names
 * +prefix+ - Honorific Prefix: for titles like Dr. or Sir
 * +suffix+ - Honorific Suffix: for titles like M.D. or Jr
+* +org+ - Organization name
 
 ===Address
 
 * +street+ - Street Address
 * +locality+ - The city or similar
 * +region+ - The state, county or similar
-* +postal-code+ - ZIP number
+* +postal_code+ - ZIP number
 * +country+ - The country
 
 ===Contact
