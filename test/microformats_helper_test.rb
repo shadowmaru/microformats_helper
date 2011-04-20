@@ -58,10 +58,48 @@ class MicroformatsHelperTest < ActionController::TestCase
   # #######################################################################
   # Testing hreview-aggregate
 
+  def test_hreview_aggregate_custom_html_optios_support
+    output = hreview_aggregate(:html => { :id => "foo"} )
+    assert_select_from output, "span#foo.hreview-aggregate"
+  end
+
+  def test_hreview_aggregate_custom_class_support
+    output = hreview_aggregate(:class => "invisible robots")
+    assert_select_from output, "span.hreview-aggregate.invisible.robots"
+  end
+
   def test_hreview_aggregate_item
     output = hreview_aggregate(:fn => "John Doe's Pawn Shop")
     assert_select_from output, "span.hreview-aggregate" do
-      assert_select "span.fn", :text => "John Doe's Pawn Shop"
+      assert_select "span.item" do
+        assert_select "span.fn", :text => "John Doe's Pawn Shop"
+      end
     end
   end
+
+  def test_hreview_aggregate_rating
+    output = hreview_aggregate(:rating => { :average => 7, :best => 10, :worst => 2 } )
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.rating" do
+        assert_select "span.average", :text => "7"
+        assert_select "span.best",    :text => "10"
+        assert_select "span.worst",   :text => "2"
+      end
+    end
+  end
+
+  def test_hreview_aggregate_count
+    output = hreview_aggregate(:count => 42)
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.count", :text => "42"
+    end
+  end
+
+  def test_hreview_aggregate_votes
+    output = hreview_aggregate(:votes => 4711)
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.votes", :text => "4711"
+    end
+  end
+
 end
