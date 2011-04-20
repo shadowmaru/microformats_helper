@@ -59,7 +59,9 @@ class MicroformatsHelperTest < ActionController::TestCase
   # Testing hreview-aggregate
 
   def test_hreview_aggregate_item
-    output   = hreview_aggregate(:fn => "John Doe's Pawn Shop")
-    assert_select_from output, "span.hreview-aggregate" 
+    output = hreview_aggregate(:fn => "John Doe's Pawn Shop")
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.fn", :text => "John Doe's Pawn Shop"
+    end
   end
 end

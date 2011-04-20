@@ -134,7 +134,7 @@ module MicroformatsHelper
       classes = "hreview-aggregate"
     end
 
-    fn = values[:fn] || ""
+    fn = values[:fn] ? content_tag("span", values[:fn], {:class => "fn"}, escape) : ""
     
     # glue everything together
     content_tag("span", fn, html_options.update(:class => classes), escape)
