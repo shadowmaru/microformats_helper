@@ -9,7 +9,7 @@ require File.dirname(__FILE__) + '/../lib/microformats_helper'
 require 'test/unit'
 Bundler.require(:test)
 
-class ActiveSupport::TestCase
+class ActionController::TestCase
   # Treats +text+ as DOM and uses selectors to check for element occurences.
   # http://www.echographia.com/blog/2009/08/22/assert_select-from-arbitrary-text/
   def assert_select_from(text, *args)
@@ -18,7 +18,7 @@ class ActiveSupport::TestCase
   end
 end
 
-class MicroformatsHelperTest < ActiveSupport::TestCase
+class MicroformatsHelperTest < ActionController::TestCase
 
   # This is the helper with the 'tag' method
   include ActionView::Helpers::TagHelper
@@ -72,5 +72,6 @@ class MicroformatsHelperTest < ActiveSupport::TestCase
     output = hcard(:fn => "John Doe", :tel => { "home" => "555-5555", "fax" => "544-5544" })
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span>\n<span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span>\n</span>\n</span>", output
   end
+
 
 end
