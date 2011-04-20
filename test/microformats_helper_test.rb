@@ -1,16 +1,24 @@
-# Rubygems is where Rails is located
-require 'rubygems'
-require File.dirname(__FILE__) + '/../lib/microformats_helper'
-# Here's the helper file we need
-require 'test/unit'
-require 'action_controller'
 begin
-  gem 'redgreen' # soz for the noise, but I like it pretty ^^
-  require 'redgreen'
-rescue LoadError; end
+  require "rubygems"
+  require "bundler/setup"
+rescue LoadError
+  raise "Could not load the bundler gem. Install it with `gem install bundler` and do a `bundle install`."
+end
+# Here's the helper file we need
+require File.dirname(__FILE__) + '/../lib/microformats_helper'
+require 'test/unit'
+Bundler.require(:test)
 
+class ActiveSupport::TestCase
+  # Treats +text+ as DOM and uses selectors to check for element occurences.
+  # http://www.echographia.com/blog/2009/08/22/assert_select-from-arbitrary-text/
+  def assert_select_from(text, *args)
+    @selected = HTML::Document.new(text).root.children
+    assert_select(*args)
+  end
+end
 
-class MicroformatsHelperTest < Test::Unit::TestCase
+class MicroformatsHelperTest < ActiveSupport::TestCase
 
   # This is the helper with the 'tag' method
   include ActionView::Helpers::TagHelper
@@ -64,4 +72,5 @@ class MicroformatsHelperTest < Test::Unit::TestCase
     output = hcard(:fn => "John Doe", :tel => { "home" => "555-5555", "fax" => "544-5544" })
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span>\n<span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span>\n</span>\n</span>", output
   end
+
 end
