@@ -55,6 +55,11 @@ class MicroformatsHelperTest < ActionController::TestCase
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span>\n<span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span>\n</span>\n</span>", output
   end
 
+  def test_hcard_html_safeness
+    assert hcard(:fn => "John Doe").html_safe?
+  end
+
+
   # #######################################################################
   # Testing hreview-aggregate
 
@@ -100,6 +105,10 @@ class MicroformatsHelperTest < ActionController::TestCase
     assert_select_from output, "span.hreview-aggregate" do
       assert_select "span.votes", :text => "4711"
     end
+  end
+
+  def test_hreview_aggregate_html_safeness
+    assert hreview_aggregate(:fn => "John Doe's Pawn Shop").html_safe?
   end
 
 end
