@@ -4,7 +4,11 @@ require File.dirname(__FILE__) + '/../lib/microformats_helper'
 # Here's the helper file we need
 require 'test/unit'
 require 'action_controller'
-require 'action_controller/test_process'
+begin
+  gem 'redgreen' # soz for the noise, but I like it pretty ^^
+  require 'redgreen'
+rescue LoadError; end
+
 
 class MicroformatsHelperTest < Test::Unit::TestCase
 
@@ -12,6 +16,9 @@ class MicroformatsHelperTest < Test::Unit::TestCase
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
   include MicroformatsHelper
+
+  # #######################################################################
+  # Testing hcard
 
   def test_hcard_fn
     output = hcard(:fn => "Ricardo Yasuda")

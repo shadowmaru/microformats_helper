@@ -37,7 +37,7 @@ module MicroformatsHelper
   # * +tel+ - Provide a hash with the phone types and numbers
   # * +url+ - Add a link to a site in the name
   # * +email+ - Add a link to a mailto: address
-  def hcard(values)
+  def hcard(values, escape = false)
 
     # support for additional HTML options, e.g. id
     html_options = (values[:html] || {})
@@ -51,59 +51,60 @@ module MicroformatsHelper
 
     # Figure out the name. Either FN or combination of family, additional, given.
     unless fn = values[:fn]
+      fn = ""
       if prefix = values[:prefix]
-        fn = content_tag("span", prefix, :class => "honorific-prefix")
+        fn += content_tag("span", prefix, {:class => "honorific-prefix"}, escape)
       end
-      fn = "" unless fn
       if org = values[:org]
-        fn += " " + content_tag("span", org, :class => "org")
+        fn += " " + content_tag("span", org, {:class => "org"}, escape)
       end
       if given = values[:given]
-        fn += " " + content_tag("span", given, :class => "given-name")
+        fn += " " + content_tag("span", given, {:class => "given-name"}, escape)
       end
       if additional = values[:additional]
-        fn += " " + content_tag("span", additional, :class => 'additional-name')
+        fn += " " + content_tag("span", additional, {:class => 'additional-name'}, escape)
       end
       if family = values[:family]
-        fn += " " + content_tag("span", family, :class => "family-name")
+        fn += " " + content_tag("span", family, {:class => "family-name"}, escape)
       end
       if suffix = values[:suffix]
-        fn += ", " + content_tag("span", suffix, :class => "honorific-suffix")
+        fn += ", " + content_tag("span", suffix, {:class => "honorific-suffix"}, escape)
       end
     end
+
 
     # Create link or span. Support passing url_for options.
     if url = values[:url]
-      container_fn = link_to(fn, url, html_options.update(:class=>"fn n url"))
+      container_fn = link_to(fn, url, html_options.update(:class=>"fn n url"), escape)
     else
-      container_fn = "\n" + content_tag("span", fn, :class => "fn n") + "\n"
+      container_fn = "\n" + content_tag("span", fn, {:class => "fn n"}, escape) + "\n"
     end
 
+    adr = ""
     if street = values[:street]
       address = true
-      adr = content_tag("span", street, :class => "street-address")
+      adr += content_tag("span", street, {:class => "street-address"}, escape)
     end
-    adr = "" unless adr
     if locality = values[:locality]
       address = true
-      adr += " " + content_tag("span", locality, :class => "locality")
+      adr += " " + content_tag("span", locality, {:class => "locality"}, escape)
     end
     if region = values[:region]
       address = true
-      adr += " - " + content_tag("span", region, :class => "region")
+      adr += " - " + content_tag("span", region, {:class => "region"}, escape)
     end
     if postal_code = values[:postal_code]
       address = true
-      adr += " " + content_tag("span", postal_code, :class => "postal-code")
+      adr += " " + content_tag("span", postal_code, {:class => "postal-code"}, escape)
     end
     if country = values[:country]
       address = true
-      adr += " " + content_tag("span", country, :class => "country")
+      adr += " " + content_tag("span", country, {:class => "country"}, escape)
     end
-    span_adr = (address == true) ? "\n" + content_tag("span", adr, :class => "adr") + "\n" : ""
+    span_adr = (address == true) ? "\n" + content_tag("span", adr, {:class => "adr"}, escape) + "\n" : ""
 
     if email = values[:email]
-      span_email = "\n" + link_to(email, "mailto:#{email}", :class => "email") + "\n"
+      span_email = "\n" + link_to(email, "mailto:#{email}", {:class => "email"}, escape) + "\n"
     else
       span_email = ""
     end
@@ -111,14 +112,14 @@ module MicroformatsHelper
     if tel = values[:tel]
       tel_values = ""
       tel.sort.reverse.each do |k,v|
-        tel_values += content_tag("span", "#{k.capitalize}: ", :class => "tel-label-#{k} type") + content_tag("span", v, :class => "value") + "\n"
+        tel_values += content_tag("span", "#{k.capitalize}: ", {:class => "tel-label-#{k} type"}, escape) + content_tag("span", v, {:class => "value"}, escape) + "\n"
       end
-      span_tel = "\n" + content_tag("span", tel_values, :class => "tel") + "\n"
+      span_tel = "\n" + content_tag("span", tel_values, {:class => "tel"}, escape) + "\n"
     else
       span_tel = ""
     end
 
-    content_tag("span", container_fn + span_adr + span_email + span_tel, html_options.update(:class => classes))
+    content_tag("span", container_fn + span_adr + span_email + span_tel, html_options.update(:class => classes), escape)
   end
 
 end
