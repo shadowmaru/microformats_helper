@@ -73,5 +73,11 @@ class MicroformatsHelperTest < ActionController::TestCase
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span>\n<span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span>\n</span>\n</span>", output
   end
 
+  # #######################################################################
+  # Testing hreview-aggregate
 
+  def test_hreview_aggregate_item
+    output   = hreview_aggregate(:fn => "John Doe's Pawn Shop")
+    assert_select_from output, "span.hreview-aggregate" 
+  end
 end

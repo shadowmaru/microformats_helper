@@ -122,4 +122,23 @@ module MicroformatsHelper
     content_tag("span", container_fn + span_adr + span_email + span_tel, html_options.update(:class => classes), escape)
   end
 
+  def hreview_aggregate(values, escape = false)
+    values.symbolize_keys!
+    # support for additional HTML options, e.g. id
+    html_options = (values[:html] || {})
+
+    # support for additional classes
+    if classes = values[:class]
+      classes << " hreview-aggregate"
+    else
+      classes = "hreview-aggregate"
+    end
+
+    fn = values[:fn] || ""
+    
+    # glue everything together
+    content_tag("span", fn, html_options.update(:class => classes), escape)
+
+  end
+
 end
