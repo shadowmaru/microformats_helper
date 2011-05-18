@@ -1,17 +1,14 @@
-# Rubygems is where Rails is located
-require 'rubygems'
-require File.dirname(__FILE__) + '/../lib/microformats_helper'
-# Here's the helper file we need
-require 'test/unit'
-require 'action_controller'
-require 'action_controller/test_process'
+require File.join(File.dirname(__FILE__), 'test_helper')
 
-class MicroformatsHelperTest < Test::Unit::TestCase
+class MicroformatsHelperTest < ActionController::TestCase
 
   # This is the helper with the 'tag' method
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
   include MicroformatsHelper
+
+  # #######################################################################
+  # Testing hcard
 
   def test_hcard_fn
     output = hcard(:fn => "Ricardo Yasuda")
@@ -57,4 +54,61 @@ class MicroformatsHelperTest < Test::Unit::TestCase
     output = hcard(:fn => "John Doe", :tel => { "home" => "555-5555", "fax" => "544-5544" })
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"tel\"><span class=\"tel-label-home type\">Home: </span><span class=\"value\">555-5555</span>\n<span class=\"tel-label-fax type\">Fax: </span><span class=\"value\">544-5544</span>\n</span>\n</span>", output
   end
+
+  def test_hcard_html_safeness
+    assert hcard(:fn => "John Doe").html_safe?
+  end
+
+
+  # #######################################################################
+  # Testing hreview-aggregate
+
+  def test_hreview_aggregate_custom_html_optios_support
+    output = hreview_aggregate(:html => { :id => "foo"} )
+    assert_select_from output, "span#foo.hreview-aggregate"
+  end
+
+  def test_hreview_aggregate_custom_class_support
+    output = hreview_aggregate(:class => "invisible robots")
+    assert_select_from output, "span.hreview-aggregate.invisible.robots"
+  end
+
+  def test_hreview_aggregate_item
+    output = hreview_aggregate(:fn => "John Doe's Pawn Shop")
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.item" do
+        assert_select "span.fn", :text => "John Doe's Pawn Shop"
+      end
+    end
+  end
+
+  def test_hreview_aggregate_rating
+    output = hreview_aggregate(:rating => { :average => 7, :best => 10, :worst => 2 } )
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.rating" do
+        assert_select "span.average", :text => "7"
+        assert_select "span.best",    :text => "10"
+        assert_select "span.worst",   :text => "2"
+      end
+    end
+  end
+
+  def test_hreview_aggregate_count
+    output = hreview_aggregate(:count => 42)
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.count", :text => "42"
+    end
+  end
+
+  def test_hreview_aggregate_votes
+    output = hreview_aggregate(:votes => 4711)
+    assert_select_from output, "span.hreview-aggregate" do
+      assert_select "span.votes", :text => "4711"
+    end
+  end
+
+  def test_hreview_aggregate_html_safeness
+    assert hreview_aggregate(:fn => "John Doe's Pawn Shop").html_safe?
+  end
+
 end
