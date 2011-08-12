@@ -20,8 +20,8 @@ Gem::Specification.new do |s|
   s.files = [
     "LICENSE",
     "README.rdoc",
-    "init.rb",
-    "lib/microformats_helper.rb"
+    "lib/microformats_helper.rb",
+    "lib/microformats_helper/helpers.rb"
   ]
   s.homepage = %q{http://github.com/shadow11/microformats_helper/tree/master}
   s.require_paths = ["lib"]

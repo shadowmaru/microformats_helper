@@ -17,7 +17,7 @@ begin
     jewel.homepage = 'http://github.com/shadow11/microformats_helper/tree/master'
     jewel.description = 'Helper to render microformats structures (eg hcard).'
     jewel.authors = ["Ricardo Shiota Yasuda"]
-    jewel.files = FileList["lib/*.rb", "*.rb", "LICENSE", "README.rdoc"]
+    jewel.files = FileList["lib/**/*.rb", "*.rb", "LICENSE", "README.rdoc"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
