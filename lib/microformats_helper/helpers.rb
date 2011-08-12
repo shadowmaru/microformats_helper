@@ -9,7 +9,7 @@
 
 
 module MicroformatsHelper
-  module Helper
+  module Helpers
     # ==Options
     # 
     # All fields are optional but the name, you are required to provide at least one of the names below.
