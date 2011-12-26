@@ -2,7 +2,7 @@
  
 Microformats Helper is a plugin for generating content-rich tags in HTML files, following Microformats standards. For more information about Microformats, check its website (http://microformats.org).
 
-Currently only the hCard microformat is available.
+Currently only hCard and hReview microformats are available.
 
 ==Options
 
@@ -52,12 +52,12 @@ A more complicated example:
 The output is:
 
   <span class="vcard">
-	<a href="http:blog.shadowmaru.org" class="fn n url">
-		<span class="given-name">Ricardo</span> <span class="family-name">Yasuda</span>
-	</a>
-	<span class="adr">
-		<span class="country-name">Brazil</span>
-	</span>
+    <a href="http:blog.shadowmaru.org" class="fn n url">
+      <span class="given-name">Ricardo</span> <span class="family-name">Yasuda</span>
+    </a>
+    <span class="adr">
+      <span class="country-name">Brazil</span>
+    </span>
   </span>
   
 An example with telephone numbers:
