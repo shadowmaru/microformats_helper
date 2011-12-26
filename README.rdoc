@@ -42,7 +42,7 @@ In your views:
 The output is:
 
   <span class="vcard">
-	<span class="fn n">Ricardo Yasuda</span>
+    <span class="fn n">Ricardo Yasuda</span>
   </span>
 
 A more complicated example:
@@ -73,3 +73,7 @@ The output is:
       <span class="tel-label-home type">Home: </span><span class="value">555-5555</span>
     </span> 
   </span>
+  
+==Credits
+
+Many thanks to Carsten Zimmermann [carpodaster] (hReview and Rails 3 support) and arnaud sellenet [demental] (gem creation). Contributions are always welcome.
