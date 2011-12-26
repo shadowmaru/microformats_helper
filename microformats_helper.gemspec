@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Helper to render microformats structures (eg hcard).}
+  s.add_runtime_dependency "activesupport"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

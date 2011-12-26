@@ -5,7 +5,7 @@ class MicroformatsHelperTest < ActionController::TestCase
   # This is the helper with the 'tag' method
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
-  include MicroformatsHelper
+  include MicroformatsHelper::Helpers
 
   # #######################################################################
   # Testing hcard
