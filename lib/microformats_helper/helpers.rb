@@ -42,6 +42,9 @@ module MicroformatsHelper
       # support for additional HTML options, e.g. id
       html_options = (values[:html] || {})
 
+      # support for more regional divider styles to seperate "locality" and "region" fields
+      values[:divider] ||= " - "
+
       # support for additional classes
       if classes = values[:class]
         classes << " vcard"
@@ -91,7 +94,7 @@ module MicroformatsHelper
       end
       if region = values[:region]
         address = true
-        adr += " - " + content_tag("span", region, {:class => "region"}, escape)
+        adr += values[:divider] + content_tag("span", region, {:class => "region"}, escape)
       end
       if postal_code = values[:postal_code]
         address = true
