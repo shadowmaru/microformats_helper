@@ -44,6 +44,11 @@ class MicroformatsHelperTest < ActionController::TestCase
     output = hcard(:fn => "John Doe", :street => "123 Fictional Lane", :locality => "Neverland", :region => "Imagination")
     assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"adr\"><span class=\"street-address\">123 Fictional Lane</span> <span class=\"locality\">Neverland</span> - <span class=\"region\">Imagination</span></span>\n</span>", output
   end
+
+  def test_hcard_address_with_divider_value
+    output = hcard(:fn => "John Doe", :street => "123 Fictional Lane", :locality => "Neverland", :region => "Imagination", :divider => ", ")
+    assert_equal "<span class=\"vcard\">\n<span class=\"fn n\">John Doe</span>\n\n<span class=\"adr\"><span class=\"street-address\">123 Fictional Lane</span> <span class=\"locality\">Neverland</span>, <span class=\"region\">Imagination</span></span>\n</span>", output
+  end
   
   def test_hcard_email
     output = hcard(:fn => "John Doe", :email => "john@doe.org")
