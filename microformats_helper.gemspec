@@ -4,17 +4,16 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{microformats_helper}
-  s.version = "0.1.0"
+  s.name = "microformats_helper"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ricardo Shiota Yasuda"]
-  s.date = %q{2011-08-12}
-  s.description = %q{Helper to render microformats structures (eg hcard).}
+  s.date = "2013-06-20"
+  s.description = "Helper to render microformats structures (eg hcard)."
   s.email = ["shadow11@gmail.com"]
   s.extra_rdoc_files = [
     "LICENSE",
-    "README",
     "README.rdoc"
   ]
   s.files = [
@@ -23,11 +22,10 @@ Gem::Specification.new do |s|
     "lib/microformats_helper.rb",
     "lib/microformats_helper/helpers.rb"
   ]
-  s.homepage = %q{http://github.com/shadow11/microformats_helper/tree/master}
+  s.homepage = "http://github.com/shadow11/microformats_helper/tree/master"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Helper to render microformats structures (eg hcard).}
-  s.add_runtime_dependency "activesupport"
+  s.rubygems_version = "1.8.25"
+  s.summary = "Helper to render microformats structures (eg hcard)."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
