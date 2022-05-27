@@ -28,7 +28,7 @@ GEM
       rake
       rdoc
     json (1.7.7)
-    rack (1.2.2)
+    rack (1.2.8)
     rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
